@@ -29,12 +29,25 @@ public class ProductServlet extends HttpServlet {
                 url="/views/thanks.jsp";
                 message="Them thanh cong";
                 break;
+            case "edit":
+                editProduct(request,response);
+                url="/views/thanks.jsp";
+                message="Edit Thanh cong";
+                break;
             default:
                 url="/views/view.jsp";
                 break;
         }
         request.setAttribute("message",message);
         getServletContext().getRequestDispatcher(url).forward(request,response);
+    }
+
+    private void editProduct(HttpServletRequest request, HttpServletResponse response) {
+        String productName=request.getParameter("productName");
+        double productPrice=Double.parseDouble(request.getParameter("productPrice"));
+        int productCode=Integer.parseInt(request.getParameter("productCode"));
+        Product newProduct = new Product(productName,productPrice);
+        products.update(productCode,newProduct);
     }
 
     private void createProduct(HttpServletRequest request, HttpServletResponse response) {
@@ -57,8 +70,17 @@ public class ProductServlet extends HttpServlet {
 
         switch(action){
             case "edit":
+                url="/views/edit.jsp";
+                int productCode=Integer.parseInt(request.getParameter("productCode"));
+                System.out.println(productCode);
+                Product editProduct=products.findProduct(productCode);
+                request.setAttribute("editProduct",editProduct);
                 break;
             case "delete":
+                int deleteCode=Integer.parseInt(request.getParameter("productCode"));
+                products.delete(deleteCode);
+                url="/views/thanks.jsp";
+                request.setAttribute("message","Delete completed!");
                 break;
             case "create":
                  url= "/views/create.jsp";
