@@ -10,9 +10,10 @@
 <head>
     <title>Create Products</title>
 </head>
-<a href="http://localhost:8080/bai_tap_quan_ly_ung_dung_war_exploded/home">Back to Home</a>
+<a href="${pageContext.request.contextPath}/home">Back to Home</a>
 <body>
-        <form method="POST" action="/products">
+        <form method="POST" action="products">
+            <input type="hidden" name="action" value="add">
             <label >Product Name</label>
             <input type="text" name="productName">
             <br>

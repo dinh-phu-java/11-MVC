@@ -12,7 +12,8 @@
 </head>
 <a href="${pageContext.request.contextPath}/home">Back to Home</a>
 <body>
-        <form method="POST" action="/products">
+        <form method="POST" action="products">
+            <input type="hidden" name="action" value="add">
             <label >Product Name</label>
             <input type="text" name="productName">
             <br>

@@ -17,8 +17,31 @@ import java.util.List;
 public class ProductServlet extends HttpServlet {
     private ProductService products=new ProductServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        PrintWriter writer = response.getWriter();
-//        writer.print("<p>access productServlet</p>");
+        String action = request.getParameter("action");
+        String url="/views/view.jsp";
+        String message="";
+        if (action==null){
+            action="view";
+        }
+        switch(action){
+            case "add":
+                createProduct(request,response);
+                url="/views/thanks.jsp";
+                message="Them thanh cong";
+                break;
+            default:
+                url="/views/view.jsp";
+                break;
+        }
+        request.setAttribute("message",message);
+        getServletContext().getRequestDispatcher(url).forward(request,response);
+    }
+
+    private void createProduct(HttpServletRequest request, HttpServletResponse response) {
+        String productName=request.getParameter("productName");
+        double productPrice=Double.parseDouble(request.getParameter("productPrice"));
+        Product newProduct = new Product(productName,productPrice);
+        products.insert(newProduct);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
