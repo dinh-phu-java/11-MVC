@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="bai tap quan ly ung dung:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/bai_tap_quan_ly_ung_dung_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="bai tap quan ly ung dung/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="bai tap quan ly ung dung" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
